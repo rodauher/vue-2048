@@ -6,12 +6,12 @@ pipeline {
                 //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
                 sh "yarn test assemble"
             }
-            post {
-                success {
-                    junit 'build/test-results/test/*.xml'
-                    archiveArtifacts 'dist/_assets/*'
-                }
-            }
+            //post {
+             //   success {
+             //       junit 'build/test-results/test/*.xml'
+             //       archiveArtifacts 'dist/_assets/*'
+             //   }
+            //}
         }
         stage('Publish'){
             steps {
