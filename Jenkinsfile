@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
-                sh "yarn build"
+                sh "yarn dev"
             }
             //post {
              //   success {
