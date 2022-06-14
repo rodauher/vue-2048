@@ -1,27 +1,20 @@
 pipeline {
     agent any
     options {
-      ansiColor('xterm')
+        ansiColor('xterm')
     }
     stages {
         stage('Build') {
             steps {
-                //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
                 sh "docker-compose build"
             }
-            //post {
-             //   success {
-             //       junit 'build/test-results/test/*.xml'
-             //       archiveArtifacts 'dist/_assets/*'
-             //   }
-            //}
         }
-        stage('Publish'){
+        stage('Publish') {
             steps {
-                sshagent(['github-ssh']) {
-                sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
-                sh 'git push --tags'
-                }
+               sshagent(['github-ssh']) {
+                   sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
+                   sh 'git push --tags'
+               }
             }
         }
     }
