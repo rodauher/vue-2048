@@ -24,5 +24,16 @@ yarn build
 ```
 
 # Fase de pruebas
+### Para construir el contenedor
+
+```bash
+docker-compose build
+```
+### Para correr el contenedor
+
+```bash
+docker-compose up
+```
+
 
 
