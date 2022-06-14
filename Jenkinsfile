@@ -3,6 +3,9 @@ pipeline {
     options {
         ansiColor('xterm')
     }
+    timestamps {
+        // some block
+    }
     stages {
         stage('Build') {
             steps {
