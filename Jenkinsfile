@@ -9,6 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh "trivy image -f json -o results.json nginx:1.18"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
                 sh "docker-compose build"
             }
         }
