@@ -14,13 +14,15 @@ pipeline {
         }
         stage('Scan'){
             steps{
-            parallel(
+              parallel(
                   a:{sh "trivy image -f json -o results-image.json server-vue:latest"},
                   b:{sh "trivy fs --security-checks vuln,secret,config -f json -o results-fs.json ./"})
-               recordIssues(tools: [trivy(pattern: 'results-fs.json')])
-               recordIssues(tools: [trivy(pattern: 'results-image.json')])
             }
-        }
+            steps{
+             recordIssues(tools: [trivy(pattern: 'results-fs.json')])
+             recordIssues(tools: [trivy(pattern: 'results-image.json')])
+            }
+            }
         stage('Publish') {
             steps {
                sshagent(['github-ssh']) {
