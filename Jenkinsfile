@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "docker-compose build"
-                sh "trivy fs --security-checks vuln,secret,config -f json -o results.json ./*"
+                sh "trivy fs --security-checks vuln,secret,config -f json -o results.json ./"
                 recordIssues(tools: [trivy(pattern: 'results.json')])
             }
         }
