@@ -33,10 +33,16 @@ pipeline {
        stage('DockerHub'){
             steps {
             withCredentials([usernamePassword(credentialsId: 'Vue-2048', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
-                sh 'echo ${PASSWD} | docker login ghcr.io -u ${USER} --password-stdin'
-                sh 'docker tag rodauher/prueba-2048:latest ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
-                sh 'docker push ghcr.io/${USER}/prueba-2048:latest'
-                sh 'docker push ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
+                //sh 'echo ${PASSWD} | docker login ghcr.io -u ${USER} --password-stdin'
+                //sh 'docker tag rodauher/prueba-2048:latest ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
+                //sh 'docker push ${USER}/prueba-2048:latest'
+                //sh 'docker push ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
+            }
+            withCredentials([string(credentialsId: 'GitToken', variable: 'TOKEN')]) {
+                sh 'echo ${TOKEN} | docker login ghcr.io -u rodauher --password-stdin'
+                sh 'docker tag rodauher/prueba-2048:latest ghcr.io/rodauher/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
+                sh 'docker push ghcr.io/rodauher/prueba-2048:latest'
+                sh 'docker push ghcr.io/rodauher/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
             }
             }
        }
