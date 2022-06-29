@@ -40,7 +40,7 @@ pipeline {
             }
             withCredentials([string(credentialsId: 'GitToken', variable: 'TOKEN')]) {
                 sh 'echo ${TOKEN} | docker login ghcr.io -u rodauher --password-stdin'
-                sh 'docker tag ghcr.io/rodauher/prueba-2048:latest ghcr.io/rodauher/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
+                //sh 'docker tag rodauher/prueba-2048:latest ghcr.io/rodauher/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
                 sh 'docker push ghcr.io/rodauher/prueba-2048:latest'
                 sh 'docker push ghcr.io/rodauher/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
             }
