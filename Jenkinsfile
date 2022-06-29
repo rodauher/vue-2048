@@ -30,5 +30,12 @@ pipeline {
                }
             }
         }
+       stage('DockerHub'){
+            steps {
+            withCredentials([usernamePassword(credentialsId: 'Vue-2048', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
+                sh 'echo $PASSWD | docker login -u $USER -password-stdin'
+            }
+            }
+       }
     }
 }
