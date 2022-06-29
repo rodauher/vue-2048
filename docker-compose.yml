@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   vue-2048:
-    image: server-vue:latest
+    image: rodauher/prueba-2048:latest
     build: .
     ports:
       - "80:80"
