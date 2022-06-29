@@ -40,6 +40,7 @@ pipeline {
             }
             withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
                 sh 'echo ${PASSWD} | docker login ghcr.io -u rodauher --password-stdin'
+                sh 'docker tag ${USER}/prueba-2048:latest ghcr.io/${USER}/prueba-2048:latest'
                 sh 'docker tag ${USER}/prueba-2048:latest ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
                 sh 'docker push ghcr.io/${USER}/prueba-2048:latest'
                 sh 'docker push ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
