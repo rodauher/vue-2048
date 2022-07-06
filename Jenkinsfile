@@ -13,6 +13,7 @@ pipeline {
             }
         }
         stage('Scan'){
+          when{false}
             steps{
             parallel(
                a:{ sh "trivy image -f json -o results-image.json server-vue:latest"
