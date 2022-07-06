@@ -45,10 +45,12 @@ pipeline {
                 sh 'docker push ghcr.io/${USER}/prueba-2048:latest'
                 sh 'docker push ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
             }
-            }
+            }}
        stage('Ansible'){
-       ansiblePlaybook credentialsId: 'SSH-EC2', playbook: '/opt/vue/ansible/ec2-launch-docker.yml'
+            steps {
+            ansiblePlaybook credentialsId: 'SSH-EC2', playbook: '/opt/vue/ansible/ec2-launch-docker.yml'
+       }
     }
 }
 }
-}
+
