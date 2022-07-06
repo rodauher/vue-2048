@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install apache httpd
+    yum:
+      name: httpd
+
+  - name: Start httpd
+    service:
+      name: httpd
+      enabled: true
+      state: started
+
+  - name: Install app
+    copy:
+      src: ../vue-2048/dist/
+      dest: /var/www/html/

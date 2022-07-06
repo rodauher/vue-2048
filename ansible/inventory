@@ -1,0 +1,2 @@
+# replace with the IP address of the server you created in the AWS console
+54.229.241.225 ansible_user=ec2-user
