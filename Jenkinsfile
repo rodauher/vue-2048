@@ -50,3 +50,4 @@ pipeline {
        ansiblePlaybook credentialsId: 'SSH-EC2', playbook: '/opt/vue/ansible/ec2-launch-docker.yml'
     }
 }
+}
