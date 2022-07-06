@@ -49,7 +49,7 @@ pipeline {
             }}
        stage('Ansible'){
             steps {
-            ansiblePlaybook credentialsId: 'SSH-EC2', playbook: '/opt/vue/ansible/ec2-launch-docker.yml'
+              ansiblePlaybook credentialsId: 'SSH-EC2', disableHostKeyChecking: true, playbook: 'ansible/ec2-launch-docker.yml'
        }
     }
 }
