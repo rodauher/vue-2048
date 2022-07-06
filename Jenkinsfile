@@ -49,7 +49,9 @@ pipeline {
             }}
        stage('Ansible'){
             steps {
-              ansiblePlaybook credentialsId: 'Administrator-AWS', disableHostKeyChecking: true, playbook: 'ansible/ec2-launch-docker.yml'
+              withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
+                 ansiblePlaybook credentialsId: 'Administrator-AWS', disableHostKeyChecking: true, playbook: 'ansible/ec2-launch-docker.yml'
+              }
        }
     }
 }
