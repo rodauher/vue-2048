@@ -54,7 +54,7 @@ pipeline {
     }
     stage('Terraform'){
       steps {
-        sh 'terraform apply -input=false /home/sinensia/Desktop/vue-2048/terraform/main.tf'
+        sh 'terraform apply -input=false terraform/main.tf'
       }
     }
     stage('Ansible') {
