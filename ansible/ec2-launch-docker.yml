@@ -41,7 +41,7 @@
 #     loop: "{{ ec2.instances }}"
 
 - name: Configure instances
-  hosts: launched
+  hosts: all
   become: true
   gather_facts: true
   vars:
