@@ -41,7 +41,6 @@ pipeline {
           //sh 'echo ${PASSWD} | docker login ghcr.io -u ${USER} --password-stdin'
           //sh 'docker tag rodauher/prueba-2048:latest ${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
           //sh 'docker push ${USER}/prueba-2048:latest'
-          //sh 'docker push ghcr.io/${USER}/prueba-2048:BUILD-1.0.${BUILD_NUMBER}'
         }
         withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
           sh 'echo ${PASSWD} | docker login ghcr.io -u rodauher --password-stdin'
@@ -54,6 +53,7 @@ pipeline {
     }
     stage('Terraform'){
       steps {
+        sh 'terraform init terraform/'
         sh 'terraform apply -input=false terraform/main.tf'
       }
     }
