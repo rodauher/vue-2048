@@ -53,8 +53,10 @@ pipeline {
     }
     stage('Terraform'){
       steps {
-        sh 'terraform init terraform/'
-        sh 'terraform apply -input=false terraform/main.tf'
+        withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
+          sh 'terraform init terraform/'
+          sh 'terraform apply -input=false terraform/main.tf'
+        }
       }
     }
     stage('Ansible') {
