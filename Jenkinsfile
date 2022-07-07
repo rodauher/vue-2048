@@ -53,10 +53,9 @@ pipeline {
       }
     }
     stage('Terraform'){
-      step{
+      steps {
         sh 'terraform apply -input=false'
       }
-
     }
     stage('Ansible') {
       steps {
