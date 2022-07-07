@@ -52,6 +52,12 @@ pipeline {
         }
       }
     }
+    stage('Terraform'){
+      step{
+        sh 'terraform apply -input=false'
+      }
+
+    }
     stage('Ansible') {
       steps {
         withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
