@@ -24,5 +24,6 @@ resource "aws_instance" "web" {
 
   tags = {
     name = "Terraforminstance-${count.index}"
+    APP  = "vue-2048"
   }
 }
