@@ -55,7 +55,7 @@ pipeline {
       steps {
         withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
           sh 'terraform -chdir=terraform/ init'
-          sh 'terraform -chdir=terraform/ apply -input=false'
+          sh 'terraform -chdir=terraform/ apply -input=false -auto-approve'
         }
       }
     }
