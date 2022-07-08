@@ -19,7 +19,7 @@
  variable "vpc_security_group_ids" {
    description = "VPC"
    type        = string
-   default     = "sg-038cbc19d8b5b36a6"
+   default     = "sg-04c0e4ce68d04e6ac"
  }
 
  variable "region" {
