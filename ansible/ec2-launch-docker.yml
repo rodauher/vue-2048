@@ -39,14 +39,7 @@
 #      vars:
 #       ansible_user: ec2-user
 #     loop: "{{ ec2.instances }}"
-
-- name: Configure instances
-  hosts: all
-  become: true
-  gather_facts: true
-  vars:
-    ansible_user: ec2-user
-  tasks:
+---
     - name: Install docker
       shell: amazon-linux-extras install -y docker
 
