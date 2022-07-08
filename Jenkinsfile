@@ -62,7 +62,7 @@ pipeline {
     stage('Ansible') {
       steps {
         withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
-          ansiblePlaybook credentialsId: 'SSH-EC2', disableHostKeyChecking: true, inventory: 'ansible/aws-ec2-plugin-2.yml',playbook: 'ansible/aws-ec2-plugin.yml', colorized: true
+          ansiblePlaybook credentialsId: 'SSH-EC2', disableHostKeyChecking: true, inventory: 'ansible/aws_ec2.yml',playbook: 'ansible/aws-ec2-plugin.yml', colorized: true
         }
       }
     }
