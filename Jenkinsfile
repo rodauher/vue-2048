@@ -51,18 +51,25 @@ pipeline {
         }
       }
     }
-    stage('Terraform'){
+//    stage('Terraform') {
+//      steps {
+//        withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
+//          sh 'terraform -chdir=terraform/ init'
+//          sh 'terraform -chdir=terraform/ apply -input=false -auto-approve'
+//        }
+//      }
+//    }
+//    stage('Ansible') {
+//      steps {
+//        withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
+//          ansiblePlaybook credentialsId: 'SSH-EC2', disableHostKeyChecking: true, inventory: 'ansible/aws_ec2.yml', playbook: 'ansible/aws-ec2-plugin.yml', colorized: true
+//        }
+//      }
+//    }
+    stage('Minikube') {
       steps {
-        withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
-          sh 'terraform -chdir=terraform/ init'
-          sh 'terraform -chdir=terraform/ apply -input=false -auto-approve'
-        }
-      }
-    }
-    stage('Ansible') {
-      steps {
-        withAWS(credentials: 'Administrator-AWS', endpointUrl: 'https://306654547360.signin.aws.amazon.com/console', region: 'eu-west-1') {
-          ansiblePlaybook credentialsId: 'SSH-EC2', disableHostKeyChecking: true, inventory: 'ansible/aws_ec2.yml',playbook: 'ansible/aws-ec2-plugin.yml', colorized: true
+        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'Minikube-cert', namespace: '', serverUrl: 'https://192.168.49.2:8443') {
+          sh 'kubectl apply -f vue2048.yaml'
         }
       }
     }
