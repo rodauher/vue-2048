@@ -68,8 +68,10 @@ pipeline {
 //    }
     stage('Minikube') {
       steps {
-        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'Minikube-cert', namespace: '', serverUrl: 'https://192.168.49.2:8443') {
+        withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: '', credentialsId: 'Minikube-cert', namespace: 'default', serverUrl: 'https://192.168.49.2:8443') {
           sh 'kubectl apply -f vue2048.yaml'
+          sh 'kubectl get nodes'
+          sh 'kubectl get services'
         }
       }
     }
